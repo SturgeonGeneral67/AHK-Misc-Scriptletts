@@ -1,0 +1,35 @@
+SetKeyDelay, 250 			 ; Set the tap delay time (milliseconds) for script Exit.
+^T:: 	 ; (Ctrl+T)
+;
+SoundBeep, 2200, 100
+
+; This script records multiple consecutive key presses, currently set to ^Esc needs pressed more than 3 times in 250 miliseconds (smashed 3x +).
+#Requires AutoHotkey v1.1.33
+
+Global presses := 0
+squelch := 400
+
+;  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶ ̶  ̶  ̶  ̶  
+RETURN
+
+GuiEscape:
+     Reload
+
+;  ̶  ̶  ̶  ̶  ̶  ̶  ̶  
+
+Home::Reload 	 ; [Home Button]
+
+;  ̶  ̶  ̶  ̶  ̶  ̶  ̶  
+
+^Esc Up::
+SetTimer done, % -squelch
+presses++
+Return
+
+done() { 			 ; Key presses have ended
+
+ If (presses > 3) { 		 ; Set number of keypress to be greater than...
+  SoundBeep 1500
+  ExitApp
+ } Else presses := 0
+}
