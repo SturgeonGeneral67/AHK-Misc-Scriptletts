@@ -1,0 +1,8 @@
+;  (Ctrl + NumberPad1 + Numberpad2)    <<<<----- Numberpad1 must be pressed before Numberpad2.
+
+^Numpad2::
+    If GetKeyState("Numpad1", "P")
+    {
+        MsgBox, The hotkey Ctrl+Numpad1+Numpad2 was pressed!
+    }
+Return
