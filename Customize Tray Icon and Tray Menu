@@ -1,0 +1,140 @@
+; 	 Customize Tray Icon and Tray Menu.
+; 	 https://www.youtube.com/watch?v=j7InpfEy1TI
+;  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  
+;
+
+Menu, Tray, Tip, This is my Tooltip for the tray. 	 ; This is the text seen on tooltip when hovering over the tray icon.
+
+;  ̶  ̶  ̶  ̶  ̶  ̶  ̶  
+
+Menu, Tray, Icon, %A_ScriptDir%\NameOfIcon.ico 	 ; Icon stored in same directory (folder) as script.
+; EXAMPLE of using existing application icon (changes tray icon):  
+; 	Ex: Menu, Tray, Icon, C:|Program Files (x86)\Google\Chrome\Application\chrome.exe, 1
+
+;  ̶  ̶  ̶  ̶  ̶  ̶  ̶  
+
+Menu, Tray, Standard 		 ; Removes standard menu list items (Open, Help,Window Spy, Reload..etc.)
+
+;  ̶  ̶  ̶  ̶  ̶  ̶  ̶  
+
+Menu, Tray, Add, Display MsgBox, myLabel 	 ; myLabel retrieved from..
+;
+	myLabel:
+	MsgBox Hi! 			 ; Also adds a clickable 'Display MsgBox' section to the tray menu, opening said MsgBox with message.
+
+;  ̶  ̶  ̶  ̶  ̶  ̶  ̶  
+
+Menu, Tray, Default, Display MsgBox 		 ; Makes above Display MsgBox show as Bold text by default. 
+
+
+;  ̶  ̶  ̶  ̶  ̶  ̶  ̶  
+
+Menu, Tray, Click, 1 				 ; (1 or 2 only allowed) Makes Left click on tray icon either single or double clickable to Display MsgBox. 
+
+
+;  ̶  ̶  ̶  ̶  ̶  ̶  ̶  
+
+Menu, Tray, Add, TestToggleEnable 		 ; Enables/disables (Greys out) Menu items
+;
+	TestToggleEnable:
+	, Menu, Tray, ToggleEnable, TestToggleEnable
+	Return
+
+
+;  ̶  ̶  ̶  ̶  ̶  ̶  ̶  
+
+Menu, Tray, Add, TestEnableAbove 		 ; ReEnables disabled (Greyed out) Menu item.
+;
+	TestEnableAbove:
+	, Menu, Tray, Enable, TestToggleEnable
+	Return
+
+;  ̶  ̶  ̶  ̶  ̶  ̶  ̶  
+
+Menu, Tray, Add, TestToggle&Check 		 ; & converts 1st letter to shortkey allowing checkbox.
+	TestToggle&Check:
+	, Menu, Tray, ToggleCheck, TestToggle&Check
+	Return
+
+
+;  ̶  ̶  ̶  ̶  ̶  ̶  ̶  
+
+Menu, Tray, Add 				 ; Menu seperator line. 
+
+
+;  ̶  ̶  ̶  ̶  ̶  ̶  ̶  
+
+Menu, Tray, Add, TestDefault 			 ; Remove Menu items default status
+;
+	TestDefault:
+	if (Default = true)
+	{
+	Menu, Tray, Default
+	Default := false
+	}
+	else
+	{
+	Menu, Tray, Default, TestDefault
+	Default := true
+	}
+	Return
+	
+	
+
+
+;  ̶  ̶  ̶  ̶  ̶  ̶  ̶  
+
+Menu, Tray, Icon TestDefault, %A_AhkPath%, 1 	 ; Adds icon to Menu item 
+
+
+;  ̶  ̶  ̶  ̶  ̶  ̶  ̶  
+
+Menu, Tray, Add, TestStandard 			 ; Adds standard menu list items (Open, Help,Window Spy, Reload..etc.)
+;
+	TestStandard:
+	if (Standard = true)
+	{
+	Menu, Tray, NoStandard
+	Standard := false
+	}
+	else
+	{
+	Menu, Tray, Standard
+	Standard := true
+	}
+	Return
+
+
+;  ̶  ̶  ̶  ̶  ̶  ̶  ̶  
+
+Menu, Child Menu, Add, Child menu item 1, myLabel 	 ; Adds a dropdown menu off parent Menu
+Menu, Child Menu, Add, Child menu item 1, myLabel 	 ; 'Child Menu' is just a name. Use own naming.
+
+
+
+;  ̶  ̶  ̶  ̶  ̶  ̶  ̶  
+
+Menu, Tray, Add, Parent Menu, :Child Menu
+
+
+;  ̶  ̶  ̶  ̶  ̶  ̶  ̶  
+
+Menu, Tray, Color, RED 		 		 ; HTML color names or a 6-digit RGB color value. Not attractive!
+
+
+;  ̶  ̶  ̶  ̶  ̶  ̶  ̶  
+
+^!M::
+Menu, Tray, Show 					 ; Create Hotkey to pop open Menu.
+Return
+
+
+;  ̶  ̶  ̶  ̶  ̶  ̶  ̶  
+
+Menu, Tray, 
+
+
+;  ̶  ̶  ̶  ̶  ̶  ̶  ̶  
+
+Menu, Tray, 
+
