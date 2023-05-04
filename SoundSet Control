@@ -1,0 +1,26 @@
+SoundGet, master_volume
+MsgBox, Master volume is %master_volume% percent.
+Sleep, 500
+
+SoundSet, 10
+Soundbeep 670, 175
+Sleep, 500
+
+SoundSet, +10
+Soundbeep 670, 175
+Sleep, 500
+
+SoundSet, +9
+Soundbeep 670, 175
+Sleep, 500
+
+SoundSet, -12
+Soundbeep 670, 175
+Sleep, 500
+
+SoundSet, 11
+Soundbeep 670, 175
+Sleep, 500
+
+SoundSet, % master_volume
+
