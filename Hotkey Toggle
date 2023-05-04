@@ -1,0 +1,13 @@
+^T:: 	 ; (Ctrl+T)
+;
+
+^K:: 		 ; ---> the hotkey you want
+toggle:=!toggle
+return
+#if (toggle=1)
+
+; CODING HERE
+
+#if
+
+; 		---> Subroutines, etc.
