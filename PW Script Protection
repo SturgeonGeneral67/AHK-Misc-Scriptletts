@@ -1,0 +1,32 @@
+; ** UNTESTED **
+
+	;  Place at beginning of Script. Uses MD5 Hash encryption to protect password.
+
+;  User = Work Login
+;  Pass = WorkOne!
+
+
+User := "529DAFF97499A332F59A586A8CEBFE59" ; this is the hashed version of "User Name"
+Pass := "76FFAE56968F59368395C4D8148D1B00" ; this is the hashed version of "Password"
+
+InputBox, CapUser, Please Enter User Name
+InputBox, CapPass, Please Enter Password
+If ( MD5(CapUser, StrLen(CapUser)) != User ) OR ( MD5(CapPass, StrLen(CapPass)) != Pass )
+{
+   MsgBox, Wrong credentials entered! Exiting now!
+   ExitApp
+}
+MsgBox, Credentials Verified!
+Return
+
+
+MD5( ByRef V, L=0 ) { ; www.autohotkey.com/forum/viewtopic.php?p=275910#275910
+ VarSetCapacity( MD5_CTX,104,0 ), DllCall( "advapi32\MD5Init", Str,MD5_CTX )
+ DllCall( "advapi32\MD5Update", Str,MD5_CTX, Str,V, UInt,L ? L : VarSetCapacity(V) )
+ DllCall( "advapi32\MD5Final", Str,MD5_CTX )
+ Loop % StrLen( Hex:="123456789ABCDEF0" )
+  N := NumGet( MD5_CTX,87+A_Index,"Char"), MD5 .= SubStr(Hex,N>>4,1) . SubStr(Hex,N&15,1)
+Return MD5
+}
+
+; ** UNTESTED **
