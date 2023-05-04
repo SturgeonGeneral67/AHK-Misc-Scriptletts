@@ -1,0 +1,22 @@
+^T:: 	 ; (Ctrl+T)
+
+Gui, Destroy
+Gui,
+    +AlwaysOnTop
+    +Resize
+Gui, Margin, 15, 15
+; Text that`naligns with`returns however`nyou need except for`nthe bottom.
+
+Gui, Add, Text, xm ym w200 0x0000 0x00800000, Text that`naligns top left`nwith returns.	 ; Top Left
+Gui, Add, Text, xm y+5 w200 0x0001 0x00800000, Text that`naligns top center`nwith returns. 	 ; Top Center
+Gui, Add, Text, xm y+5 w200 h70 0x0002 0x00800000, Text that`naligns top right`nwith returns.	 ; Top Right
+
+; = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+; Text that aligns without `n returns.
+Gui, Add, Text, xm y+5 w300 0x0200 0x00800000, Text that`naligns center left`nwithout returns. 	 ; Center Left
+Gui, Add, Text, xm y+5 w300 h50 0x0201 0x00800000, Text that`naligns center center`nwithout returns.	 ; Center Center
+Gui, Add, Text, xm y+5 w300 h35 0x0202 0x00800000, Text that`naligns center right`nwithout returns.	 ; Center Right
+
+Gui, Show, AutoSize
+Return
