@@ -1,0 +1,9 @@
+; 	 - Add to scripts for hotkey suspend toggle.
+
+Esc::
+Suspend, Off
+Pause, Off, 1
+If (toggle := !toggle) {
+ Suspend, On
+ Pause, On, 1
+}
