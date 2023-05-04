@@ -1,0 +1,8 @@
+
+; 	 How to use Ctrl+DoubleClick as a trigger
+
+^T::
+If (A_ThisHotkey = A_PriorHotkey && A_TimeSincePriorHotkey < 250)
+
+SoundBeep, 2100, 100
+Return
