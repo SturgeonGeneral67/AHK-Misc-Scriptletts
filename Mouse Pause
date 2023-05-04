@@ -1,0 +1,9 @@
+#NoEnv
+#SingleInstance force
+
+F1::
+    BlockInput, MouseMove
+    KeyWait, F1
+    BlockInput, MouseMoveOff
+return
+
