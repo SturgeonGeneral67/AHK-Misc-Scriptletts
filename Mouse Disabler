@@ -1,0 +1,12 @@
+#SingleInstance, Force
+
+!m::
+
+KeyWait, LButton
+Hotkey, *LButton,% NoLB?"On":("Return",NoLB := True)
+
+Sleep, 10000
+
+Hotkey, *LButton, Off
+Return:
+Return
