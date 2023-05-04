@@ -1,0 +1,30 @@
+SetKeyDelay, 250 			 ; Set the tap delay time (milliseconds) for script Exit.
+^T:: 
+    SoundBeep, 2200, 75
+
+RETURN
+
+GuiEscape:
+     Reload
+
+^!R::
+Home::
+    Reload
+
+^Esc::
+if (A_TimeSincePriorHotkey > 250) {
+    TapCount := 1
+    KeyWait, Esc
+} else 
+{
+    TapCount++
+    if (TapCount = 3) {			; Set TapCount to # of key taps wanted.
+    SoundBeep, 2200, 75
+        Gui, Destroy
+        ExitApp
+} else 
+{
+        KeyWait, Esc
+    }
+}
+Return
