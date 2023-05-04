@@ -1,0 +1,56 @@
+;  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶ ̶  ̶  ̶  ̶  
+; https://www.autohotkey.com/boards/viewtopic.php?f=76&t=106674&p=474323&hilit=UngroupingTrayIcon#p474323
+;  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶ ̶  ̶  ̶  ̶  
+
+hIcon := LoadPicture("Shell32", "Icon44", IMAGE_ICON := 1)
+MyUngroupingIcon := new UngroupingTrayIcon(hIcon)
+
+class UngroupingTrayIcon
+{
+   #NoTrayIcon
+   __New(hIcon, trayTip := "") {
+      static msg := 0x404, hwnd := 0
+           , NIM_ADD := 0x00000000
+           , flags := ( NIF_MESSAGE := 0x00000001 )
+                    | ( NIF_ICON    := 0x00000002 )
+                    | ( NIF_TIP     := 0x00000004 )
+                    | ( NIF_GUID    := 0x00000020 )
+                    
+      (trayTip = "" && trayTip := A_ScriptName)
+      hwnd := !hwnd ? A_ScriptHwnd : DllCall("CreateWindowEx", "UInt", 0, "Str", "AutoHotkey", "Str", "", "UInt", 0
+                                                             , "Int", 0, "Int", 0, "Int", 0, "Int", 0
+                                                             , "Ptr", 0, "Ptr", 0, "Ptr", 0, "Ptr", 0, "Ptr")
+      this.hwnd := hwnd
+      VarSetCapacity(NOTIFYICONDATA, size := 64 + StrPut(trayTip, "CP0"), 0)
+      NumPut(size   , &NOTIFYICONDATA)
+      NumPut(hwnd   , &NOTIFYICONDATA + A_PtrSize)
+      NumPut(flags  , &NOTIFYICONDATA + A_PtrSize*2 + 4)
+      NumPut(msg    , &NOTIFYICONDATA + A_PtrSize*2 + 8)
+      NumPut(hIcon  , &NOTIFYICONDATA + A_PtrSize*3 + 8)
+      StrPut(trayTip, &NOTIFYICONDATA + A_PtrSize*4 + 8, "CP0")
+      this.GUID := this._CreateGuid(&NOTIFYICONDATA + size - A_PtrSize - 16)
+      if !DllCall("Shell32\Shell_NotifyIcon", "UInt", NIM_ADD, "Ptr", &NOTIFYICONDATA)
+         throw "Shell_NotifyIcon failed, error " . A_LastError
+   }
+   __Delete() {
+      static NIM_DELETE := 0x00000002
+      VarSetCapacity(NOTIFYICONDATA, size := 16, 0)
+      NumPut(size     , NOTIFYICONDATA)
+      NumPut(this.hwnd, NOTIFYICONDATA, A_PtrSize)
+      DllCall("Shell32\Shell_NotifyIcon", "UInt", NIM_DELETE, "Ptr", &NOTIFYICONDATA)
+      (this.hwnd = A_ScriptHwnd || DllCall("DestroyWindow", "Ptr", this.hwnd))
+   }
+   _CreateGuid(pGUID) {
+      VarSetCapacity(CLSID, 78) ; (38 + 1) * 2
+      DllCall("Ole32\CoCreateGuid", "Ptr", pGUID)
+      DllCall("Ole32\StringFromGUID2", "Ptr", pGUID, "WStr", CLSID, "Int", 39)
+      Return CLSID
+   }
+}
+
+RETURN
+^!R::Reload 	 ; (Ctrl+Alt+R)
+^Esc::
+     Gui, Destroy 	 ; 
+     ExitApp 	 ; (Ctrl+Esc)
+     
