@@ -1,0 +1,99 @@
+^T::
+
+#NoEnv
+SetBatchLines, -1 			 ; Use -1 to never sleep (i.e. have the script run at maximum speed).
+
+Gui, 
+    +AlwaysOnTop
+    -Caption 
+    +hwndHGUI 			 ; Allows a comment to appear on the same line as a command.
+    +LastFound
+Gui, Color, ABCDEF
+Gui, Font, s17 c123456, Calibri
+Gui, Margin, 15, 15
+Gui, Add, Text, w200 h100 Center +0x0200 0x00800000, Hello world! 	 ; 0x00800000 = Creates a thin-line border box.
+Gui, Show, Hide
+
+WinGetPos, X, Y, W, H
+R := Min(W, H) // 5 			 ; <<<<-----  Set value to amount of cornering. (0.5=Oval, 0=square, 1= capsule, 5=rounded corners).
+WinSet, Region, 0-0 W%W% H%H% R%R%-%R% 	  ; <<<<-----  Cornering math.
+Gui, Show
+OnMessage(0x0201, "WM_LBUTTONDOWN")
+Return
+
+WM_LBUTTONDOWN() {
+   PostMessage, 0x00A1, 2, 0
+}
+
+;  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶ ̶  ̶  ̶  ̶  
+RETURN
+
+GuiEscape:
+     Reload
+
+^!R::Reload 	 ; (Ctrl+Alt+R)
+Home::Reload 	 ; [Home Button]
+
+;  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶ ̶  ̶  ̶  ̶  
+; 	* * * EXIT ROUTINE * * *
+;  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶ ̶  ̶  ̶  ̶  
+;  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  
+
+;  ̶  ̶  ̶  ̶  ̶  ̶  Esc 1x time
+^Esc::
+     Gui, Destroy 	 ; 
+     ExitApp 	 ; (Ctrl+Esc)
+
+;  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  
+;  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  
+
+;  ̶  ̶  ̶  ̶  ̶  ̶  Esc 2x times
+/*
+^Esc::
+If (A_ThisHotkey = A_PriorHotkey && A_TimeSincePriorHotkey < 250) 
+{
+    ; Double tap detected, exit the script
+    SoundBeep, 2200, 100
+    ExitApp
+} 
+else 
+{
+    ; Single tap detected, beep and reset the double tap timer
+    SoundBeep, 1900, 75
+    KeyWait, Esc
+}
+Return
+*/
+
+;  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  
+;  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  
+
+;  ̶  ̶  ̶  ̶  ̶  ̶  Esc 4x times (set to number needed.)
+/*
+^Esc::
+; If the time since the last Esc key press is greater than the tap delay, 
+; reset the tap count and wait for the next Esc key press.
+if (A_TimeSincePriorHotkey > 250) 
+{
+    tapCount := 1
+    KeyWait, Esc
+    } 
+else 
+{
+    ; If the Esc key was pressed again within the tap delay, increment the tap count.
+    tapCount++
+    ; If the tap count reaches 4, exit the script.
+    if (tapCount = 4) 
+{
+        ExitApp
+    } 
+else 
+{
+        ; Otherwise, wait for the next Esc key press.
+        KeyWait, Esc
+    }
+}
+Return
+*/
+
+;  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  
