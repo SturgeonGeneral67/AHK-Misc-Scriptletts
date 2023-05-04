@@ -1,0 +1,41 @@
+; Open specific website every 60 minutes.
+; https://www.autohotkey.com/boards/viewtopic.php?f=76&t=116242
+;
+
+/*
+Open up a specific website every 60 minutes
+8:02 am
+9:02 am
+10:02 am
+etc..
+START at 8:02 am daily and STOP at 5:02 pm daily.
+*/
+
+TimeNeeded := SubStr(A_Now, -5, 4) ;extract from the var A_Now actual hours and minutes
+msgbox, %TimeNeeded%
+
+Loop
+{
+	if (TimeNeeded = 0802) ;check if hours and minutes are the one needed to start the script
+	{
+		SetTimer, Run, 3600000 ; set the label RUN to be run every hour, time in milliseconds
+		break ; exit the loop
+	}
+	else
+		sleep, 1000 ; else check again in 1 second 
+}
+return
+
+Run: ;the label called by the timer
+TimeNeeded := SubStr(A_Now, -5, 4) ;extract as before
+if (TimeNeeded = 1702) ;check if it's time to stop
+{
+	SetTimer, Run, off ;turn off the timer
+	ExitApp ;exit app if needed
+}
+
+Run, firefox.exe -private-window https://www.someurl.com
+
+Sleep, 4000  ; give time for the website to load up fully
+;click, 1400, 584  ; clicks on the play button
+return
