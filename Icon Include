@@ -1,0 +1,69 @@
+
+
+; Insert the code below code into your script at the beginning before your actual code but after any special modifiers such as:
+ 
+; #NoEnv  ; Recommended for performance and compatibility with future AutoHotkey releases.
+; #Warn  ; Enable warnings to assist with detecting common errors.
+; SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
+; SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
+
+; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
+
+; iconx: Change the tray icon displayed for each of your scripts so you can keep track of which is which.
+
+; Also now changes the icon of a compiled script (.exe)  < ICON [I_Icon] >
+
+; Write up by KraZe_EyE Inspired by code seen in DirMenu.ahk (highly recommended)
+
+; -http://www.autohotkey.com/board/topic/91109-favorite-folders-popup-menu-with-gui/
+
+;- http://www.autohotkey.com/board/topic/121982-how-to-give-your-scripts-unique-icons-in-the-windows-tray/
+
+; If you wish to have a different icon for this script to distinguish it from other scripts in the tray.
+
+; Provide the filepath/name below (leave blank to have it default to the usual 'H' all AHK scripts have).
+
+
+; COLOR LISTING FILENAMES: BLACK, BLUE, GOLD, GREY, ORANGE, PINK, RED, VIOLET, LIGHTGREEN==lg, DARKGREEN==dg
+;							File Directory\*LETTER DESIRED*\COLOR.ico
+
+;  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶      ←       ←
+
+I_Icon = C:\Program Files\AutoHotkey\Letter Icons\K\grey.ico
+ICON [I_Icon]                        ;Changes a compiled script's icon (.exe)
+
+if I_Icon <>
+
+IfExist, %I_Icon%
+	Menu, Tray, Icon, %I_Icon%   ;Changes menu tray icon 
+
+; ---------------------------------------
+
+^!Esc::Exitapp
+
+; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
+; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
+
+	; CODE
+
+I_Icon = path-to-icon\file.ico
+IfExist, %I_Icon%
+Menu, Tray, Icon, %I_Icon%
+;return
+
+; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
+; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
+
+	; EXAMPLE
+
+SetWorkingDir %A_ScriptDir%
+
+I_Icon = %A_ScriptDir%\program icon\icon name.ico
+ICON [I_Icon]                        ;Changes a compiled script's icon (.exe)
+
+
+if I_Icon <>
+
+
+IfExist, %I_Icon%
+	Menu, Tray, Icon, %I_Icon%   ;Changes menu tray icon 
