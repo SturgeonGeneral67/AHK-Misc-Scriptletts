@@ -1,0 +1,12 @@
+^T::
+SetTimer notepad, -3500
+Send command
+Return
+
+notepad() {
+ Run notepad
+Sleep 150
+;  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  
+ SplashTextOn,,, Notepad is open.
+ Sleep, 2000
+ SplashTextOff
