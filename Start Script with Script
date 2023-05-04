@@ -1,0 +1,19 @@
+;  ̶  ̶  ̶  ̶  ̶  ̶  ̶   The below goes in the auxilary script.
+; With the HotKey command :
+HotKey, ^1, LaunchUpdate
+return
+
+LaunchUpdate:
+	Run, "C:\Users\Chas32\Desktop\update.ahk"
+	;...any code you need...
+	return
+; 
+;  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶ 
+;
+
+;  ̶  ̶  ̶  ̶  ̶  ̶  ̶   The below goes in the base script.
+; With a Hotkey :
+^1::
+	Run, "C:\Users\Chas32\Desktop\update.ahk"
+	;...any code you need...
+Return
