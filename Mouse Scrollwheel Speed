@@ -1,0 +1,16 @@
+; 	 - Slows Mouse Scrollwheel Speed while holding F1.
+; 	 - Restores speed when F1 is released.
+
+F1::
+SPI_GETWHEELSCROLLLINES := 0x68
+SPI_SETWHEELSCROLLLINES := 0x69
+
+ 	 ; Retrieve the current speed so that it can be restored later.
+DllCall("SystemParametersInfo", "UInt", SPI_GETWHEELSCROLLLINES, "UInt", 0, "UIntP", OrigWheelSpeed, "UInt", 0)
+DllCall("SystemParametersInfo", "UInt", SPI_SETWHEELSCROLLLINES, "UInt", 1, "UInt", 0, "UInt", 1|2)
+
+KeyWait F1 	 ; This prevents keyboard auto-repeat from doing the DllCall repeatedly.
+return
+
+F1 up::DllCall("SystemParametersInfo", "UInt", SPI_SETWHEELSCROLLLINES, "UInt", OrigWheelSpeed, "UInt", 0, "UInt", 1|2) 	 ; Restore the original speed.
+
