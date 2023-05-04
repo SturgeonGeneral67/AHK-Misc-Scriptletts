@@ -1,0 +1,20 @@
+;  ̶  ̶  The global corppw := "p@ssword" needs to be near the top
+;  ̶  ̶  of the script before any hotkeys or returns.
+
+global corppw := "p@ssword" 	 ; ← Change as needed.
+
+; ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶
+
+^!p::        ; (Ctrl + Alt +  P)
+	SendPassword()
+return
+
+SendPassword()
+{
+	SendRaw % corppw ; Pulls info from global tag.
+Sleep 250
+Send {Tab} ; Simulates pressing Tab key to select the Accept button. Delete this line if default becomes Accept.
+Sleep 250
+Send {Enter} ; Simulates pressing Enter key
+
+}
