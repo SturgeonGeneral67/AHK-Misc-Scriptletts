@@ -1,0 +1,116 @@
+
+#NoEnv ; 	Avoids checking empty variables to see if they are environment variables (recommended for all new scripts).
+#SingleInstance, Force  ;Determines whether a script is allowed to run again when it is already running.
+;#NoTrayIcon ;Disables the showing of a tray icon.
+
+; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+; - - - - - - - - - - - - - - - - - Start Bar - - - - - - - - - - - - - - - - 
+; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+Progress, b ZH5 h54 w130 fm9 fs8 wm400 ws400 cb00FF00 ct00B4FD cw000000, , Script Enabled
+
+Progress, 5
+Sleep 67
+Progress, 10
+Sleep 67
+Progress, 15
+Sleep 67
+Progress, 20
+Sleep 67
+Progress, 25
+Sleep 67
+Progress, 30
+Sleep 67
+Progress, 35
+Sleep 67
+
+Progress, b ZH5 h54 w130 fm9 fs8 wm400 ws400 cb00FF00 ct00B4FD cw000000, Press 'Ctrl+Esc' to exit, Script Enabled
+
+Progress, 40
+Sleep 67
+Progress, 45
+Sleep 67
+Progress, 50
+Sleep 67
+Progress, 55
+Sleep 67
+Progress, 60
+Sleep 67
+Progress, 65
+Sleep 67
+Progress, 70
+Sleep 67
+Progress, 75
+Sleep 67
+Progress, 80
+Sleep 67
+Progress, 85
+Sleep 67
+Progress, 90
+Sleep 67
+Progress, 95
+Sleep 67
+Progress, 100
+Sleep, 467
+
+SoundBeep, 2067, 250 ; "Script Enabled Beep"
+
+Progress, 100
+Sleep, 267
+Progress, Off
+
+; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+; - - - - - - - - - - - - - - - - - Exit Bar - - - - - - - - - - - - - - - - -
+; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+^Esc::
+
+Progress, b ZH5 h54 w130 fm9 fs8 wm400 ws400 cb404040 ctD81717 cw000000, , Script Exiting
+SoundBeep, 2017, 250 ; "Script Disabled Beep"
+
+Progress, 5
+Sleep 67
+Progress, 10
+Sleep 67
+Progress, 15
+Sleep 67
+Progress, 20
+Sleep 67
+Progress, 25
+Sleep 67
+Progress, 30
+Sleep 67
+Progress, 35
+Sleep 67
+
+Progress, b ZH5 h54 w130 fm9 fs8 wm400 ws400 cb404040 ctD81717 cw000000, Good Bye, Script is Exiting
+
+Progress, 40
+Sleep 67
+Progress, 45
+Sleep 67
+Progress, 50
+Sleep 67
+Progress, 55
+Sleep 67
+Progress, 60
+Sleep 67
+Progress, 65
+Sleep 67
+Progress, 70
+Sleep 67
+Progress, 75
+Sleep 67
+Progress, 80
+Sleep 67
+Progress, 85
+Sleep 67
+Progress, 90
+Sleep 67
+Progress, 95
+Sleep 67
+Progress, 100
+Sleep, 167
+Progress, Off
+
+ExitApp
