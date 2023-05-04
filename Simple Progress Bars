@@ -1,0 +1,115 @@
+;=========================================
+;=========================================
+
+; 		 ; GREEN PROGRESS BAR
+^Numpad1:: 	 ; Ctrl=Numberpad #1
+
+;  ̶  ̶  ̶  ̶  ̶  * Makes Gui transparent *
+Gui, Color, 676767
+Gui +AlwaysOnTop -Caption
+Gui +LastFound  ; Make GUI window last found window for use by line below.
+WinSet, TransColor, 676767
+;  ̶  ̶  ̶  ̶  ̶  
+
+Gui, Font, s12 w567 c000000, Segoe UI
+Gui, Add, Text, x55, Progressing...
+
+Gui, Add, Progress, x10 y+1 w160 h10 c0BC843 Background000000 Range1-48 vMyProgress
+
+Gui, Font, s9 w300 cRED, Segoe UI
+Gui, Add, Text, x35 Y+1, Ctrl+Esc to Exit Script
+
+gui, show
+
+GuiControl,, MyProgress, 0
+Loop, 48
+{
+  GuiControl,, MyProgress, +1
+   Sleep, 16
+}
+
+Sleep 750
+SoundBeep, 317, 67 ; "Script Enabled Beep"
+SoundBeep, 367, 67
+
+Gui, Destroy
+
+Return
+
+;=========================================
+;=========================================
+;=========================================
+
+; 		 ; RED PROGRESS BAR
+^Numpad2:: 	 ; Ctrl=Numberpad #2
+
+;  ̶  ̶  ̶  ̶  ̶  * Make Gui transparent *
+Gui, Color, 676767
+Gui +AlwaysOnTop -Caption
+Gui +LastFound  ; Make GUI window last found window for use by line below.
+WinSet, TransColor, 676767
+;  ̶  ̶  ̶  ̶  ̶  
+
+Gui, Font, s12 w567 cRED, Segoe UI
+Gui, Add, Text, x60, Exiting...
+
+Gui, Add, Progress, x10 y+1 w160 h10 cRED Background000000 Range1-48 vMyProgress
+
+Gui, Font, s9 w567 c000000, Segoe UI
+Gui, Add, Text, x60 y+1, Good Bye
+
+gui, show
+
+GuiControl,, MyProgress, 0
+Loop, 48
+{
+  GuiControl,, MyProgress, +1
+   Sleep, 16
+}
+
+Sleep 250
+SoundBeep, 367, 67 ; "Script Enabled Beep"
+SoundBeep, 317, 67
+
+Gui, Destroy
+
+Return
+
+
+;=========================================
+;=========================================
+;=========================================
+
+; 		 ; YELLOW PROGRESS BAR
+^Numpad3:: 	 ; Ctrl=Numberpad #3
+
+;  ̶  ̶  ̶  ̶  ̶  * Make Gui transparent *
+Gui, Color, 676767
+Gui +AlwaysOnTop -Caption
+Gui +LastFound  ; Make GUI window last found window for use by line below.
+WinSet, TransColor, 676767
+;  ̶  ̶  ̶  ̶  ̶  
+
+Gui, Font, s12 w567 cYELLOW Bold, Segoe UI
+Gui, Add, Text, x10, And Another thing...
+
+Gui, Add, Progress, x10 y+1 w160 h10 cYellow Background000000 Range1-48 vMyProgress
+Gui, Font, s9 w567 cYELLOW Italic, Segoe UI
+Gui, Add, Text, x10 y+1, WAAASSSSUUUPPPP!?!?!
+
+gui, show
+
+GuiControl,, MyProgress, 0
+Loop, 48
+{
+  GuiControl,, MyProgress, +1
+   Sleep, 16
+}
+
+Sleep 250
+SoundBeep, 367, 67 ; "Script Enabled Beep"
+SoundBeep, 317, 67
+
+Gui, Destroy
+
+Return
