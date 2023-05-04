@@ -1,0 +1,24 @@
+Circle := MakeCircle("RED", Diameter := 20, 2) 		; Color and size defined.
+MoveCircle := Func("MoveCircle").Bind(Circle, Diameter//2)
+SetTimer,% MoveCircle, 50
+Return
+MakeCircle(color, Diameter := 100, thickness := 10, transparency := 255)
+{
+	Gui New, +E0x20 +AlwaysOnTop +HwndhCircle +ToolWindow -Caption
+	; https://autohotkey.com/board/topic/7377-create-a-transparent-circle-in-window-w-winset-region/
+	outer := DllCall("CreateEllipticRgn", "Int", 0, "Int", 0, "Int", Diameter, "Int", Diameter)
+	inner := DllCall("CreateEllipticRgn", "Int", thickness, "Int", thickness, "Int"
+	, Diameter - thickness, "Int", Diameter - thickness)
+	DllCall("CombineRgn", "UInt", outer, "UInt", outer, "UInt", inner, "Int", 3) ; RGN_XOR = 3
+	DllCall("SetWindowRgn", "UInt", hCircle, "UInt", outer, "UInt", true)
+	Gui Color,% color
+	Gui Show, xCenter yCenter w%Diameter% h%Diameter% NoActivate
+	WinSet Transparent,% transparency,% Circle := "ahk_id " hCircle
+	Return, Circle
+}
+MoveCircle(Circle, Radius)
+{
+	CoordMode Mouse
+	MouseGetPos x, y
+	WinMove,% Circle,, x - Radius , y - Radius
+}
