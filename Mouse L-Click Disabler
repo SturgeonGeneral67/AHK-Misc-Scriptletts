@@ -1,0 +1,24 @@
+
+#SingleInstance, Force
+
+^SPACE::
+
+KeyWait, LButton
+Hotkey, *LButton,% NoLB?"On":("Return",NoLB := True)
+
+Sleep, 10000 	 ; Mouse L-Click resumes after 10 seconds.
+
+Hotkey, *LButton, Off
+Return:
+Return
+
+;  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  
+
+RETURN
+
+^HOME:: 
+    Reload
+
+^Esc::
+    ExitApp
+;  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  
