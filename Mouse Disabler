@@ -1,12 +1,57 @@
-#SingleInstance, Force
 
-!m::
+; … … … … … … … … … … … … … … … … … … … …  
 
-KeyWait, LButton
-Hotkey, *LButton,% NoLB?"On":("Return",NoLB := True)
+#Persistent ; Keeps a script permanently running until user closes it or ExitApp is encountered.
+#SingleInstance, Force ; Determines whether a script is allowed to run again when it is already running.
+#NoEnv ; Recommended for performance and future compatibility.
+SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
+SetWorkingDir %A_ScriptDir% ; Ensures a consistent starting directory.
+#InstallMouseHook ; Forces the unconditional installation of the mouse hook.
 
-Sleep, 10000
+; … … … … … … … … … … … … … … … … … … … …  
+Menu, Tray, Icon, wmploc.dll, 99 		 ; White Star tray Icon.
+; … … … … … … … … … … … … … … … … … … … …  
+SetKeyDelay, 250 		 ; Sets the TapCount allowed delay time (milliseconds) for script Exit.  (tied to Exit routine)
+; … … … … … … … … … … … … … … … … … … … …  
+^T:: 	 ; … …  (Ctrl + T) 		‴‴ HOTKEY-TRIGGER ‴‴
 
-Hotkey, *LButton, Off
-Return:
+; Disables mouse movement while 'Q' is held down.
+
+q::BlockInput, MouseMove
+
+q up::BlockInput, MouseMoveOff
+
+;
+; … … … … … … … … … … … … … … … … … … … …  
+RETURN
+
+GuiEscape:
+     Reload
+
+; … … … …  
+
+^!R::Reload 	 ; … …  (Ctrl + Alt + R)
+Home::Reload 	 ; … …  [Home Button]
+
+; … … … …  
+
+^Esc:: 		; … …  (Ctrl + (Esc x # of TapCounts))
+if (A_TimeSincePriorHotkey > 250) 
+{
+    TapCount := 1
+    KeyWait, Esc
+} else {
+    TapCount++
+    if (TapCount = 2) 	 ; <<<<---- Set TapCount to # of key taps wanted.
+{
+    SoundBeep, 2200, 75
+        Gui, Destroy
+        ExitApp
+} else {
+        KeyWait, Esc
+    }
+}
 Return
+
+; … … … … … … … … … … … … … … … … … … … …  
+; … … … … … … … … … … … … … … … … … … … …  
