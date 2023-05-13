@@ -1,0 +1,77 @@
+/*
+
+Refresh Script … …	Ctrl + HOME key rapidly clicked 2 times.
+Exit Script … … … …	Ctrl + Escape key rapidly clicked 3 times.
+
+*/
+; … … … … … … … … … … … … … … … … … … … …  
+SetKeyDelay, 250 		 ; Sets the TapCount allowed delay time (milliseconds) for script Exit.  (tied to Exit routine)
+; … … … … … … … … … … … … … … … … … … … …  
+
+; Hold {B} key down to start and release {B} key to stop the code.
+
+; This script uses a hotkey to trigger a timed loop.
+; The timer frequency is a random number that is determined at the end of each iteration.
+
+$B::
+go()
+SoundBeep 1500
+KeyWait B
+SetTimer go, Off
+SoundBeep 1000
+Return
+
+go() {  			 ; … … … Timed loop: this function calls itself after a random period elapses.
+ Send B
+ Random rnd, 200, 300 	 ; … … … Determine a random number for the next iteration.
+ SetTimer go, % -rnd 		 ; … … … Call this function again after the random period has elapsed.
+}
+
+; … … … … … … … … … … … … … … … … … … … …  
+RETURN
+
+GuiEscape:
+     Reload
+
+; … … … …  
+
+^Home:: 		  ; … …  [Home Button]
+if (A_TimeSincePriorHotkey > 250) 
+{
+    TapCount := 1
+    KeyWait, Esc
+} else {
+    TapCount++
+    if (TapCount = 2) 	 ; <<<<---- Set TapCount to # of key taps wanted.
+    {
+    SoundBeep, 2200, 75
+        Reload
+} else {
+        KeyWait, Esc
+    }
+}
+Return
+
+; … … … …  
+
+^Esc:: 		; … …  Ctrl + ((Esc) times (# of TapCounts))
+if (A_TimeSincePriorHotkey > 250) 
+{
+    TapCount := 1
+    KeyWait, Esc
+} else {
+    TapCount++
+    if (TapCount = 3) 	 ; <<<<---- Set TapCount to # of key taps wanted.
+    {
+    SoundBeep, 2200, 75
+        Gui, Destroy
+        ExitApp
+} else {
+        KeyWait, Esc
+    }
+}
+Return
+
+; … … … … … … … … … … … … … … … … … … … …  
+; … … … … … SCRIPT  END  … … … … … … … … …
+; … … … … … … … … … … … … … … … … … … … …  
