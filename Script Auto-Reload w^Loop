@@ -1,0 +1,39 @@
+/*
+Auto-reload script upon changes.
+If you make any changes to the script file and save it, the script will automatically reload itself and continue running without manual intervention.
+*/
+
+; … … … … … … … … … … … … … … … … … … … …  
+; … … … … Place in Auto-Execute … … … … … 
+; … … … … … … … … … … … … … … … … … … … …  
+#SingleInstance, Force
+SetBatchLines -1
+DetectHiddenWindows, On
+; … … … … Get the initial modification timestamp of the script.
+FileGetTime, scriptModTime, %A_ScriptFullPath%
+; … … … … … … … … … … … … … … … … … … … … 
+
+
+; … … … … … … … … … … … … … … … … … … … …  
+; … … … … … …  Place Code Here  … … … … … 
+; … … … … … … … … … … … … … … … … … … … …  
+
+
+; … … … … … … … … … … … … … … … … … … … …  
+; … … … …  Place near script end  … … … … … 
+; … … … … … … … … … … … … … … … … … … … …  
+    Loop
+{
+; … … … … Check if the script file has been modified
+    FileGetTime, currentModTime, %A_ScriptFullPath%
+    
+; … … … … If the modification timestamp has changed, reload the script.
+    if (currentModTime != scriptModTime)
+    {
+        Reload
+        Sleep, 500 		 ; … … … Wait for the script to reload.
+        break 			 ; … … … Exit the loop to prevent multiple reloads.
+    }
+        Sleep, 1000 	 ; … … … Check for changes every 1 second.
+}
+Return
