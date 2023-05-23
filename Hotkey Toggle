@@ -1,13 +1,24 @@
-^T:: 	 ; (Ctrl+T)
-;
+Toggle := 0
 
-^K:: 		 ; ---> the hotkey you want
-toggle:=!toggle
-return
-#if (toggle=1)
+^!T::    ; Ctrl + Alt + T
+    Toggle := !Toggle
+    if (Toggle = 1) {
+        MsgBox, ,TOGGLE SWITCH, You pressed Ctrl+Alt+T.`nToggle is now active., 15 	 ; 15 second timeout.
+    } else {
+        Soundbeep, 1400, 75
+        Soundbeep, 1400, 75
+        Send {^}{!}T  ; Do nothing if toggle is off.
 
-; CODING HERE
+    }
+Return
 
-#if
+; ---> Subroutines, etc.
 
-; 		---> Subroutines, etc.
+;  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶  ̶
+RETURN
+
+^Home::
+    Reload    ; Ctrl + [Home]
+
+^Esc::
+    ExitApp   ; Ctrl + [Esc]
